@@ -147,18 +147,10 @@
 				regulator-initial-mode = <0>;
 			};
 
-			v1v8_audio: ldo1 {
-				regulator-name = "v1v8_audio";
+			v1v8_out: ldo2 {
+				regulator-name = "v1v8_out";
 				regulator-min-microvolt = <1800000>;
 				regulator-max-microvolt = <1800000>;
-				regulator-always-on;
-				interrupts = <IT_CURLIM_LDO1 0>;
-			};
-
-			v3v3_hdmi: ldo2 {
-				regulator-name = "v3v3_hdmi";
-				regulator-min-microvolt = <3300000>;
-				regulator-max-microvolt = <3300000>;
 				regulator-always-on;
 				interrupts = <IT_CURLIM_LDO2 0>;
 			};
@@ -186,21 +178,13 @@
 				regulator-boot-on;
 			};
 
-			v1v2_hdmi: ldo6 {
-				regulator-name = "v1v2_hdmi";
-				regulator-min-microvolt = <1200000>;
-				regulator-max-microvolt = <1200000>;
-				regulator-always-on;
-				interrupts = <IT_CURLIM_LDO6 0>;
-			};
-
 			vref_ddr: vref_ddr {
 				regulator-name = "vref_ddr";
 				regulator-always-on;
 				regulator-over-current-protection;
 			};
 
-			 bst_out: boost {
+			bst_out: boost {
 				regulator-name = "bst_out";
 				interrupts = <IT_OCP_BOOST 0>;
 			 };
@@ -210,10 +194,11 @@
 				interrupts = <IT_OCP_OTG 0>;
 			 };
 
-			 vbus_sw: pwr_sw2 {
-				regulator-name = "vbus_sw";
+			 sw_out: pwr_sw2 {
+				regulator-name = "sw_out";
 				interrupts = <IT_OCP_SWOUT 0>;
 				regulator-active-discharge;
+				regulator-always-on;
 			 };
 		};
 
