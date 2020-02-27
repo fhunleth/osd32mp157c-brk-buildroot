@@ -66,6 +66,22 @@
 			default-state = "off";
 		};
 	};
+
+	reg11: reg11 {
+		compatible = "regulator-fixed";
+		regulator-name = "reg11";
+		regulator-min-microvolt = <1100000>;
+		regulator-max-microvolt = <1100000>;
+		regulator-always-on;
+	};
+
+	reg18: reg18 {
+		compatible = "regulator-fixed";
+		regulator-name = "reg18";
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		regulator-always-on;
+	};
 };
 
 &gpu {
@@ -187,19 +203,19 @@
 			bst_out: boost {
 				regulator-name = "bst_out";
 				interrupts = <IT_OCP_BOOST 0>;
-			 };
+			};
 
 			vbus_otg: pwr_sw1 {
 				regulator-name = "vbus_otg";
 				interrupts = <IT_OCP_OTG 0>;
-			 };
+			};
 
-			 sw_out: pwr_sw2 {
+			sw_out: pwr_sw2 {
 				regulator-name = "sw_out";
 				interrupts = <IT_OCP_SWOUT 0>;
 				regulator-active-discharge;
 				regulator-always-on;
-			 };
+			};
 		};
 
 
@@ -244,3 +260,33 @@
 	pinctrl-0 = <&uart4_pins_a>;
 	status = "okay";
 };
+
+&usbh_ehci {
+        phys = <&usbphyc_port0>;
+        phy-names = "usb";
+        status = "okay";
+};
+
+&usbotg_hs {
+        dr_mode = "peripheral";
+        phys = <&usbphyc_port1 0>;
+        phy-names = "usb2-phy";
+        status = "okay";
+};
+
+&usbphyc_port0 {
+        phy-supply = <&vdd_usb>;
+        vdda1v1-supply = <&reg11>;
+        vdda1v8-supply = <&reg18>;
+};
+
+&usbphyc_port1 {
+        phy-supply = <&vdd_usb>;
+        vdda1v1-supply = <&reg11>;
+        vdda1v8-supply = <&reg18>;
+};
+
+&usbphyc {
+        status = "okay";
+};
+
